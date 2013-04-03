@@ -52,11 +52,6 @@ def md(text):
             safe_mode='replace',
             html_replacement_text='[HTML REMOVED]'))
 
-def _pluralize(string, count):
-    if count <> 1:
-        string += 's'
-    return string
-
 
 @register.filter
 def duration(duration):
@@ -68,15 +63,13 @@ def duration(duration):
     minutes = (duration // 60) % 60
     hours = (duration // 60) // 60
 
-    s = '%d %s' % (seconds, _pluralize('second', seconds))
-    m = '%d %s' % (minutes, _pluralize('minute', minutes))
-    h = '%d %s' % (hours, _pluralize('hour', hours))
+    s = '%02d' % (seconds)
+    m = '%02d' % (minutes)
+    h = '%02d' % (hours)
 
     output = []
     if hours > 0:
         output.append(h)
-    if minutes > 0:
-        output.append(m)
-    if seconds > 0:
-        output.append(s)
-    return ', '.join(output)
+    output.append(m)
+    output.append(s)
+    return ':'.join(output)
