@@ -56,7 +56,7 @@ def md(text):
 @register.filter
 def duration(duration):
     """Filter that converts a duration in seconds to
-    something like 1 hour, 37 minutes, 1 second"""
+    something like 01:54:01"""
 
     duration = int(duration)
     seconds = duration % 60
